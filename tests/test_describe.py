@@ -11,6 +11,7 @@ from modelkit.core.model import Model
 from modelkit.testing import ReferenceText
 from modelkit.utils.pretty import describe
 from tests import TEST_DIR
+from typing import Dict
 
 
 def test_describe(monkeypatch):
@@ -135,10 +136,12 @@ class SomeObject:
         2,
         None,
         {"x": 1},
+        {"x": int},
         [1, 2, 3],
         [1, 2, 3, [4]],
         object(),
         pydantic.BaseModel(),
+        {"x": 1, "y": pydantic.BaseModel()},
         int,
         SomeObject(),
         float,
@@ -146,6 +149,7 @@ class SomeObject:
         lambda x: 1,
         b"ok",
         (x for x in range(10)),
+        Dict[str,str]
     ],
 )
 def test_pretty_describe(value):
